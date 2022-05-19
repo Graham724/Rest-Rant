@@ -12,6 +12,10 @@ router.get('/new', (req, res) => {
     res.render('places/new')
 })
 
+// router.get('/:id', (req, res) => {
+//   res.render('place')
+// })
+
 
 router.post('/', (req, res) => {
     console.log(req.body)

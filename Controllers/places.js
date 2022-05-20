@@ -12,10 +12,6 @@ router.get('/new', (req, res) => {
     res.render('places/new')
 })
 
-// router.get('/:id', (req, res) => {
-//   res.render('place')
-// })
-
 
 router.post('/', (req, res) => {
     console.log(req.body)
@@ -50,6 +46,7 @@ router.get('/:id', (req, res) => {
   }
 })
 
+//DELETE
 router.delete('/:id', (req, res) => {
   let id = Number(req.params.id)
   if (isNaN(id)) {
@@ -64,11 +61,20 @@ router.delete('/:id', (req, res) => {
   }
 })
 
+//EDIT
+router.get('/:id/edit', (req, res) => {
+  let id = Number(req.params.id)
+  if (isNaN(id)) {
+      res.render('error404')
+  }
+  else if (!places[id]) {
+      res.render('error404')
+  }
+  else {
+    res.render('places/edit', { place: places[id] })
+  }
+})
 
-
-// router.get('/edit', (req, res) => {
-//     res.render('places/edit')
-// })
 
 
 module.exports = router

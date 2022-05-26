@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const methodOverride = require('method-override')
 
+
 //middleware
 // app.set('views', _dirname + '/views')
 app.set('view engine', 'jsx')
@@ -22,9 +23,7 @@ app.get('*', (req, res) => {
     res.render('error404')
 })
 
-//db connection
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true})
-.then(() => console.log('DB connected'))
-.catch(err => console.error(err));
 
-app.listen(process.env.PORT)
+const PORT = process.env.PORT
+
+app.listen(PORT, () => {console.log(`listening on port ${PORT}`)})

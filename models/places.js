@@ -8,6 +8,7 @@ const placeSchema = new mongoose.Schema({
   },
   pic: {
     type: String,
+    default: 'http://placekitten.com/350/350'
   },
   cuisines: {
     type: String,
@@ -22,7 +23,9 @@ const placeSchema = new mongoose.Schema({
     default: 'USA'
   },
   founded: {
-    type: Number
+    type: Number,
+    min: [1673, 'Surely not that old?!?'],
+    max: [new Date().getFullYear(), 'Hey, this year is in the future!']
   }
 })
 

@@ -43,18 +43,15 @@ router.post('/', (req, res) => {
 })
 
 //Delete
-router.delete('/:id', (req, res) => {
-    let id = Number(req.params.id)
-    if (isNaN(id)) {
-        res.render('error404')
-    }
-    else if (!places[id]) {
-        res.render('error404')
-    }
-    else {
-        places.splice(id, 1)
-        res.redirect('/places')
-    }
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    await Place.findByIdAndDelete(id)
+    res.status(303).redirect('/places')
+  } catch (error) {
+    console.log(error)
+    res.send("ERROR")
+  }
 })
 
 

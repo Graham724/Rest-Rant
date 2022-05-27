@@ -10,6 +10,9 @@ function show (data) {
                 <img src={data.place.pic} alt={data.place.name} />
                     <h2>Desctiption</h2>
                     <p>Located in { data.place.city }, { data.place.state }</p>
+                    <h3>
+                        {data.place.showEstablished()}
+                    </h3>
                     <p>Serving { data.place.cuisines }</p>
                 </div>
                 <div>

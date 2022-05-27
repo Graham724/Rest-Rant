@@ -32,6 +32,9 @@ router.get('/:id', (req, res) => {
 
 //Post
 router.post('/', (req, res) => {
+    if(!req.body.pic) {
+      delete req.body['pic']
+    }
     db.Place.create(req.body)
     .then(() => {
         res.redirect('/places')

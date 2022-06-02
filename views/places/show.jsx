@@ -8,6 +8,23 @@ function show (data) {
                 <h4 className="alert-danger">{data.message}</h4>
             )
         }
+    let comments = (
+        <h3 className="inactive">No Comments Yet!</h3>
+    )
+    if (data.place.comments.length) {
+        comments = data.place.comments.map(c => {
+          return (
+            <div className="border">
+              <h2 className="rant">{c.rant ? 'Rant!' : 'Rave!'}</h2>
+              <h4>{c.content}</h4>
+              <h3>
+                <stong>- {c.author}</stong>
+              </h3>
+              <h4>Rating: {c.stars}</h4>
+            </div>
+          )
+        })
+      }
     return (
         <Def>
             <main>
@@ -24,7 +41,18 @@ function show (data) {
                 </div>
                 <div>
                     <h2>Comments</h2>
-                    <p>no comments yet</p>
+                    <p>{ comments }</p>
+                    <form method='POST' action={`/places/${data.place._id}/comment`}>
+                    <label htmlFor='author'>Author</label>
+                    <input id='author' name='author' type="text"></input>
+                    <label htmlFor='content'>Content</label>
+                    <textarea id="content" name="content" type="text"></textarea>
+                    <label htmlFor='stars'>Star Rating</label>
+                    <input id='stars' name='stars' type='range' min='1' max='5' step='0.5'></input>
+                    <label htmlFor='rant'>Rant?</label>
+                    <input id='rant' name='rant' type='checkbox'></input>
+                    <input type='submit'></input>
+                </form>
                 </div>
                 <div>
                     <h2>Rating</h2>

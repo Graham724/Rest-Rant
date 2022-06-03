@@ -12,6 +12,9 @@ function show (data) {
     let comments = (
         <h3 className="inactive">No Comments Yet!</h3>
     )
+    let rating = (
+        <h3 className="inactive">Not Yet Rated</h3>
+    )
     if (data.place.comments.length) {
         comments = data.place.comments.map(c => {
           return (
@@ -25,6 +28,15 @@ function show (data) {
             </div>
           )
         })
+        let sumRatings = data.place.comments.reduce((tot, c) => {
+            return tot + c.stars
+          }, 0)
+          let averageRating = sumRatings / data.place.comments.length
+          rating = (
+            <h3>
+              {Math.round(averageRating)} stars
+            </h3>
+          )
       }
     return (
         <Def>
@@ -44,19 +56,28 @@ function show (data) {
                     <h2>Comments</h2>
                     <p>{ comments }</p>
                     <form method='POST' action={`/places/${data.place._id}/comment`}>
-                    <label htmlFor='author'>Author</label>
-                    <input id='author' name='author' type="text"></input>
-                    <label htmlFor='content'>Content</label>
-                    <textarea id="content" name="content" type="text"></textarea>
-                    <label htmlFor='stars'>Star Rating</label>
-                    <input id='stars' name='stars' type='range' min='1' max='5'></input>
-                    <label htmlFor='rant'>Rant?</label>
-                    <input id='rant' name='rant' type='checkbox'></input>
+                        <div className='form-group'>
+                            <label htmlFor='author'>Author</label>
+                            <input id='author' name='author' type="text"></input>
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor='content'>Content</label>
+                            <textarea id="content" name="content" type="text"></textarea>
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor='stars'>Star Rating</label>
+                            <input id='stars' name='stars' type='number' min='0' max='5'></input>
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor='rant'>Rant?</label>
+                            <input id='rant' name='rant' type='checkbox'></input>
+                        </div>
                     <input type='submit'></input>
                 </form>
                 </div>
                 <div>
                     <h2>Rating</h2>
+                    {rating}
                     <p>No Rating Yet</p>
                 </div>
 
@@ -74,3 +95,4 @@ function show (data) {
   }
 
   module.exports = show
+   

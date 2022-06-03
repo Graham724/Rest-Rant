@@ -21,7 +21,7 @@ router.get('/new', (req,res) => {
 router.get('/:id', (req, res) => {
     db.Place.findById(req.params.id).populate('comments')
     .then(place => {
-      console.log(place.comments)
+      console.log(place)
       res.render('places/show', { place })
     })
     .catch(err => {
@@ -110,7 +110,7 @@ router.get('/:id/edit', (req, res) => {
     .then(place => {
         db.Comment.create(req.body)
         .then(comment => {
-            place.comments.push(comment.id)
+            place.comments.push(comment._id)
             place.save()
             .then(() => {
                 res.redirect(`/places/${req.params.id}`)

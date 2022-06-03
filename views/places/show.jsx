@@ -2,6 +2,7 @@ const React = require('react')
 const Def = require('../default')
 
 function show (data) {
+    console.log(data.place.comments)
     let message = ' '
         if (data.message) {
             message = (
@@ -48,7 +49,7 @@ function show (data) {
                     <label htmlFor='content'>Content</label>
                     <textarea id="content" name="content" type="text"></textarea>
                     <label htmlFor='stars'>Star Rating</label>
-                    <input id='stars' name='stars' type='range' min='1' max='5' step='0.5'></input>
+                    <input id='stars' name='stars' type='range' min='1' max='5'></input>
                     <label htmlFor='rant'>Rant?</label>
                     <input id='rant' name='rant' type='checkbox'></input>
                     <input type='submit'></input>

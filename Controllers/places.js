@@ -57,15 +57,14 @@ router.post('/', (req, res) => {
 
 //Delete
 router.delete('/:id', async (req, res) => {
-  try {
-    const { id } = req.params
-    await Place.findByIdAndDelete(id)
-    res.status(303).redirect('/places')
-  } catch (error) {
-    console.log(error)
-    res.send("ERROR")
-  }
-  
+  db.Place.findByIdAndDelete(req.params.id)
+  .then(place => {
+      res.redirect('/places')
+  })
+  .catch(err => {
+      console.log('err', err)
+      res.render('error404')
+  })
 })
 
 

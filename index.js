@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const methodOverride = require('method-override')
+const placesRoutes = require('./controllers/places')
 
 
 //middleware
@@ -19,7 +20,7 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
-app.use('/places', require('./controllers/places'))
+app.use('/places', placesRoutes)
 
 app.get('*', (req, res) => {
     res.render('error404')

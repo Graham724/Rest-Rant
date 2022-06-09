@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const methodOverride = require('method-override')
-const placesRoutes = require('./places')
+const placesRoutes = require('./controllers/places')
 
 
 //middleware
